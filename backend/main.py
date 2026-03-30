@@ -1,9 +1,12 @@
+import os
+import sys
+sys.path.append(os.path.dirname(__file__))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 import logging
-import os
 
 from config import settings
 from database import init_db
