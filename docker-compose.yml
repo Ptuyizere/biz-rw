@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: bizrw_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/bizrw.db:/app/bizrw.db
+    env_file:
+      - ./backend/.env
+    environment:
+      - RELOAD=false
+      - UPLOAD_DIR=/app/uploads
+      - DATABASE_URL=sqlite:////app/bizrw.db
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    container_name: bizrw_frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  uploads:
