@@ -30,7 +30,6 @@ venv.bak/
 # ── Environment / Secrets ─────────────────────────────────────────────────────
 .env
 .env.local
-.env.production
 .env.staging
 !.env.example
 
